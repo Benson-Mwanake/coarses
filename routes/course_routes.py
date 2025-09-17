@@ -1,7 +1,7 @@
-rom flask import Blueprint, request, jsonify
-from models import db, Course
+from flask import Blueprint, request, jsonify
+from ..models import db, Course
 
-course_bp = Blueprint("courses", _name_, url_prefix="/courses")
+course_bp = Blueprint("courses", __name__, url_prefix="/courses")
 
 @course_bp.route("/", methods=["GET"])
 def get_courses():

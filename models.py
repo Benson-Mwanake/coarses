@@ -3,6 +3,7 @@ from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
 
+# ✅ Define association table FIRST
 enrollments = db.Table(
     "enrollments",
     db.Column("student_id", db.Integer, db.ForeignKey("students.id"), primary_key=True),
@@ -11,7 +12,7 @@ enrollments = db.Table(
 
 
 class Course(db.Model, SerializerMixin):
-    _tablename_ = "courses"
+    __tablename__ = "courses"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
@@ -22,12 +23,12 @@ class Course(db.Model, SerializerMixin):
         "Student", secondary=enrollments, back_populates="courses"
     )
 
-    def _repr_(self):
+    def __repr__(self):
         return f"<Course {self.name}>"
 
 
 class Student(db.Model, SerializerMixin):
-    _tablename_ = "students"
+    __tablename__ = "students"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -37,5 +38,5 @@ class Student(db.Model, SerializerMixin):
         "Course", secondary=enrollments, back_populates="students"
     )
 
-    def _repr_(self):
+    def __repr__(self):
         return f"<Student {self.name}>"

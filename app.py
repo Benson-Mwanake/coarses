@@ -1,11 +1,11 @@
 from flask import Flask
-from models import db
-from routes.course_routes import course_bp
-from routes.student_routes import student_bp
+from .models import db
+from .routes.course_routes import course_bp
+from .routes.student_routes import student_bp
 
 
 def create_app():
-    app = Flask(_name_)
+    app = Flask(__name__)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///courses.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -21,6 +21,6 @@ def create_app():
     return app
 
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     app = create_app()
     app.run(debug=True)

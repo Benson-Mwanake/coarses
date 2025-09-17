@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from models import db, Student, Course
+from ..models import db, Student, Course
 
-student_bp = Blueprint("students", _name_, url_prefix="/students")
+student_bp = Blueprint("students", __name__, url_prefix="/students")
 
 
 @student_bp.route("/", methods=["GET"])
@@ -48,7 +48,6 @@ def delete_student(id):
     return jsonify({"message": "Student deleted successfully"}), 200
 
 
-# Extra: Enroll a student in a course
 @student_bp.route("/<int:student_id>/enroll/<int:course_id>", methods=["POST"])
 def enroll_student(student_id, course_id):
     student = Student.query.get_or_404(student_id)
