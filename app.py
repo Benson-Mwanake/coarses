@@ -1,8 +1,7 @@
 from flask import Flask
-from .models import db
-from .routes.course_routes import course_bp
-from .routes.student_routes import student_bp
-
+from models import db
+from routes.course_routes import course_bp
+from routes.student_routes import student_bp
 
 def create_app():
     app = Flask(__name__)
@@ -21,6 +20,6 @@ def create_app():
     return app
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True)
+    app.run(port=5555, debug=True)
